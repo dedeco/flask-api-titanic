@@ -1,0 +1,4 @@
+{
+  "test.py::Step2TestCase::test_by_hacks": true,
+  "test.py::Step3TestCase::test_less_than_3": true
+}

@@ -1,0 +1,20 @@
+
+
+# search by name Andre
+curl -X POST -H "Content-Type: application/json" -d  '{"name":
+ "Andre"}' http://127.0.0.1:5000/survivals
+
+# search by blank
+curl -X POST -H "Content-Type: application/json" -d  '{"name":
+ ""}' http://127.0.0.1:5000/survivals
+
+ # search <=3
+curl -X POST -H "Content-Type: application/json" -d  '{"name":
+ "and"}' http://127.0.0.1:5000/survivals
+
+# search diferent
+curl -X POST -H "Content-Type: application/json" -d  '{"xxxx":
+ "and"}' http://127.0.0.1:5000/survivals
+
+# blank
+curl -X POST http://127.0.0.1:5000/survivals

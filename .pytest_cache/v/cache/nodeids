@@ -1,0 +1,13 @@
+[
+  "test.py::Step1TestCase::test_by_name",
+  "test.py::Step2TestCase::test_by_blank_name",
+  "test.py::Step2TestCase::test_by_name_not_found",
+  "test.py::Step2TestCase::test_escape",
+  "test.py::Step2TestCase::test_less_than_3",
+  "test.py::Step3TestCase::test_by_blank_without_name",
+  "test.py::Step3TestCase::test_empty_msg",
+  "test.py::Step4TestCase::test_by_auth",
+  "test.py::Step5TestCase::test_by_auth_sucess",
+  "test.py::Step5TestCase::test_by_auth_user_not_exists",
+  "test.py::Step5TestCase::test_by_auth_wrong_pass"
+]
