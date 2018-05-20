@@ -1,7 +1,9 @@
 [
   "test.py::Step1TestCase::test_by_name",
+  "test.py::Step1TestCase::test_by_name_get",
   "test.py::Step2TestCase::test_by_blank_name",
   "test.py::Step2TestCase::test_by_name_not_found",
+  "test.py::Step2TestCase::test_by_weird_names",
   "test.py::Step2TestCase::test_escape",
   "test.py::Step2TestCase::test_less_than_3",
   "test.py::Step3TestCase::test_by_blank_without_name",

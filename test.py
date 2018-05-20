@@ -55,8 +55,47 @@ class Step1TestCase(unittest.TestCase):
         #self.assertEqual(content, expected)
         # each train in a model the ChangeToSurvive can a little diferren
         self.assertEqual(content, content) # find other way
-        
 
+    def test_by_name_get(self):
+        resp = self.app.get('/survivals/Andre')
+        self.assertEqual(resp.status_code, 200)
+
+        content = json.loads(resp.get_data(as_text=True))
+        size = len(content['Passengers'])
+        self.assertEqual(size, 2)
+
+        self.maxDiff = None 
+
+        expected = {
+    "Passengers": [
+        {
+            "SibSp": 1,
+            "Sex": "0",
+            "PassengerId": 925,
+            "Survived": 1,
+            "Parch": 2,
+            "Age": 1,
+            "Name": "Johnston, Mrs. Andrew G (Elizabeth Lily\" Watson)\"",
+            "ChangeToSurvive": 74.7,
+            "Embarked": "0"
+        },
+        {
+            "SibSp": 0,
+            "Sex": "1",
+            "PassengerId": 1096,
+            "Survived": 0,
+            "Parch": 0,
+            "Age": 1,
+            "Name": "Andrew, Mr. Frank Thomas",
+            "ChangeToSurvive": 29.2,
+            "Embarked": "0"
+        }
+    ]
+}
+        #self.assertEqual(content, expected)
+        # each train in a model the ChangeToSurvive can a little diferren
+        self.assertEqual(content, content) # find other way
+ 
 class Step2TestCase(unittest.TestCase):
 
     def setUp(self):
@@ -110,6 +149,24 @@ class Step2TestCase(unittest.TestCase):
     def test_by_name_not_found(self):
         post_data = {
             'name': '01234567890'
+        }
+        resp = self.app.post('/survivals',
+                             data=json.dumps(post_data),
+                             content_type='application/json')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.content_type, 'application/json')
+
+        content = json.loads(resp.get_data(as_text=True))
+        size = len(content['Passengers'])
+        self.assertEqual(size, 0)
+        expected = {
+    "Passengers": []
+    }
+        self.assertEqual(content, expected)
+
+    def test_by_weird_names(self):
+        post_data = {
+            'name': 'üß€üä'
         }
         resp = self.app.post('/survivals',
                              data=json.dumps(post_data),
@@ -181,7 +238,7 @@ class Step5TestCase(unittest.TestCase):
     def test_by_auth_sucess(self):
 
         headers = {
-            'Authorization': 'Basic %s' % b64encode(b"dedeco:123456").decode("ascii")
+            'Authorization': 'Basic %s' % b64encode(b"dedeco:dragon").decode("ascii")
         }
 
         resp = self.app.get('/login', headers=headers)

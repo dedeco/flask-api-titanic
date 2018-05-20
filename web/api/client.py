@@ -56,25 +56,30 @@ def login():
 
     return make_response('Could not verify', 401, {'WWW-Authenticate' : 'Basic realm="Login required."'})
 
-
+@app.route('/survivals/<name>', methods=['GET','POST'])
 @app.route('/survivals', methods=['POST'])
-def get_survivals():
+def get_survivals(name=None):
 
-    if request.content_type != JSON_MIME_TYPE:
-        error = json.dumps({'error': 'Invalid Content Type'})
-        return json_response(error, 400)
+    if request.method == 'POST':
 
-    data = request.json
+        if request.content_type != JSON_MIME_TYPE:
+            error = json.dumps({'error': 'Invalid Content Type'})
+            return json_response(error, 400)
 
-    if not data.get('name'):
-        error = json.dumps({'error': 'Missing field/s (name)'})
-        return json_response(error, 400)
+        data = request.json
 
-    if  not len(data.get('name')) > 3:
-        error = json.dumps({'error': 'Name must be at least 3 characters'})
-        return json_response(error, 400)
+        if not data.get('name'):
+            error = json.dumps({'error': 'Missing field/s (name)'})
+            return json_response(error, 400)
 
-    name = escape(data.get('name')) 
+        if  not len(data.get('name')) > 3:
+            error = json.dumps({'error': 'Name must be at least 3 characters'})
+            return json_response(error, 400)
+
+        name = escape(data.get('name')) 
+
+    else:
+        name =  escape(name)
 
     q = db.session.query(Passenger)\
         .filter(Passenger.Name.ilike('%' + name + '%'))
