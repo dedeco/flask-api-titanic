@@ -14,6 +14,8 @@ This repo shows how to create a simple RESTful API using the Flask web framework
 - Predict the chance of survival for that particular passenger using the model you build in 2.
 - Let the API return both the matched name as well as the prediction for that name.
 
+[Here is an article about this repo (on Medium).](https://medium.com/@dedecu/flask-api-using-dnnclassifie-tensorflow-models-based-on-kaggle-dataset-titanic-survivals-5841a7b6dd0)
+
 ## Install guide
 
 ##### Clone the repo
